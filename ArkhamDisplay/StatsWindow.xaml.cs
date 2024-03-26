@@ -8,7 +8,7 @@ public partial class StatsWindow : Window
     {
         InitializeComponent();
 
-        var rect = Utils.DetermineFinalWindowRectPosition(Data.StatsWindowRect);
+        var rect = Utils.DetermineFinalWindowRectPosition(Data.StatsWindowRect, 750, 400);
         Width = rect.Width;
         Height = rect.Height;
         Left = rect.X;
