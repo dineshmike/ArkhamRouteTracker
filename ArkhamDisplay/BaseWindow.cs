@@ -649,21 +649,11 @@ public abstract class BaseWindow : Window
 
     protected virtual void OpenStatsWindow(object sender = null, RoutedEventArgs e = null)
     {
-        if (statsWindow != null)
+        if (statsWindow is null)
         {
-            if (statsWindow.IsVisible)
-            {
-                //statsWindow.Focus(); //This is convenient but it causes problems that I'll addres later
-                return;
-            }
-            else
-            {
-                statsWindow.Close();
-                statsWindow = null;
-            }
+            statsWindow = new StatsWindow();
         }
 
-        statsWindow = new StatsWindow();
         statsWindow.Activate();
         statsWindow.Show();
         SetStatsWindowStats();
