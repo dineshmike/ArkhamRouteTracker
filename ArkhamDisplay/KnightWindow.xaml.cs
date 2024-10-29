@@ -123,4 +123,32 @@ public partial class KnightWindow : BaseWindow
 
     protected override string GetRiddleCount() =>
         saveParser.GetLastMatch(@"\b\d*\/243\b");
+
+    protected override List<Entry> GetEntriesForDisplay(Route route)
+    {
+        List<Entry> entries = route.GetEntriesWithPlaceholdersMoved();
+
+        if (!string.IsNullOrWhiteSpace(SearchBox.Text))
+        {
+            entries = entries.Where(x => x.name.Contains(SearchBox.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        return entries;
+    }
+
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        IsFiltered = !string.IsNullOrWhiteSpace(SearchBox.Text);
+
+        if (!startButton.IsEnabled)
+        {
+            base.Update(true);
+        }
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        SearchBox.Text = "";
+        SearchBox.Focus();
+    }
 }
